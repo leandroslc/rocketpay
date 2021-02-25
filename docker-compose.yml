@@ -10,3 +10,16 @@ services:
       POSTGRES_PASSWORD: postgres
     ports:
       - 5432:5432
+
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - 4000:4000
+    network_mode: host
+    volumes:
+      - .:/workspace
+    command: sleep infinity
+    depends_on:
+      - db
