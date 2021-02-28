@@ -4,9 +4,11 @@ defmodule Rocketpay.Accounts.Withdraw do
 
   def call(params) do
     params
-    |> Operation.call(&handle/2)
+    |> transaction()
     |> run_transaction()
   end
+
+  def transaction(params), do: Operation.call(params, :withdraw, &handle/2)
 
   defp handle({:ok, value}, balance), do: Decimal.sub(balance, value)
 
@@ -15,7 +17,7 @@ defmodule Rocketpay.Accounts.Withdraw do
   defp run_transaction(multi) do
     case Repo.transaction(multi) do
       {:error, _operation, reason, _changes} -> {:error, reason}
-      {:ok, %{update_balance: account}} -> {:ok, account}
+      {:ok, %{withdraw_update_balance: account}} -> {:ok, account}
     end
   end
 end
