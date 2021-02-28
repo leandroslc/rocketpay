@@ -1,17 +1,28 @@
 defmodule RocketpayWeb.Router do
   use RocketpayWeb, :router
 
+  import Plug.BasicAuth
+
   pipeline :api do
     plug :accepts, ["json"]
+  end
+
+  pipeline :auth do
+    plug :basic_auth, Application.compile_env(:rocketpay, :basic_auth)
   end
 
   scope "/api", RocketpayWeb do
     pipe_through :api
 
+    post "/users", UsersController, :create
+  end
+
+  scope "/api", RocketpayWeb do
+    pipe_through [:api, :auth]
+
     put "/accounts/:id/deposit", AccountsController, :deposit
     put "/accounts/:id/withdraw", AccountsController, :withdraw
     post "/accounts/transaction", AccountsController, :transaction
-    post "/users", UsersController, :create
   end
 
   if Mix.env() in [:dev, :test] do
