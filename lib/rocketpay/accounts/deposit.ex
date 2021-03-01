@@ -2,13 +2,13 @@ defmodule Rocketpay.Accounts.Deposit do
   alias Rocketpay.Accounts.Operation
   alias Rocketpay.Repo
 
-  def call(params) do
+  def call(params, user) do
     params
-    |> transaction()
+    |> transaction(user)
     |> run_transaction()
   end
 
-  def transaction(params), do: Operation.call(params, :deposit, &handle/2)
+  def transaction(params, user \\ nil), do: Operation.call(params, user, :deposit, &handle/2)
 
   defp handle({:ok, value}, balance), do: Decimal.add(balance, value)
 

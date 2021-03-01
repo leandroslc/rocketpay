@@ -4,14 +4,14 @@ defmodule Rocketpay.Accounts.Transaction do
   alias Rocketpay.Accounts.Transactions.Response, as: TransactionResponse
   alias Rocketpay.Repo
 
-  def call(params) do
+  def call(params, user) do
     %{"from" => from_id, "to" => to_id, "value" => value} = params
 
     withdraw_params = build_params(from_id, value)
     deposit_params = build_params(to_id, value)
 
     Multi.new()
-    |> Multi.merge(fn _changes -> Withdraw.transaction(withdraw_params) end)
+    |> Multi.merge(fn _changes -> Withdraw.transaction(withdraw_params, user) end)
     |> Multi.merge(fn _changes -> Deposit.transaction(deposit_params) end)
     |> run_transaction()
   end

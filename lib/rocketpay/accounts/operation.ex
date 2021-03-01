@@ -1,8 +1,8 @@
 defmodule Rocketpay.Accounts.Operation do
   alias Ecto.Multi
-  alias Rocketpay.Account
+  alias Rocketpay.{Account, User}
 
-  def call(params, name, operation) do
+  def call(params, user \\ nil, name, operation) do
     %{"id" => id, "value" => value} = params
 
     get_account_operation = operation_name(name, :account)
@@ -10,6 +10,10 @@ defmodule Rocketpay.Accounts.Operation do
     Multi.new()
     |> Multi.run(get_account_operation, fn repo, _changes ->
       get_account(repo, id)
+    end)
+    |> Multi.run(operation_name(name, :check_owner), fn _repo, changes ->
+      account = Map.get(changes, get_account_operation)
+      check_owner(account, user)
     end)
     |> Multi.run(operation_name(name, :update_balance), fn repo, changes ->
       account = Map.get(changes, get_account_operation)
@@ -21,6 +25,16 @@ defmodule Rocketpay.Accounts.Operation do
     case repo.get(Account, id) do
       nil -> {:error, "Account not found"}
       account -> {:ok, account}
+    end
+  end
+
+  defp check_owner(%Account{} = account, nil), do: {:ok, account}
+
+  defp check_owner(%Account{user_id: user_id} = account, %User{id: id}) do
+    if user_id == id do
+      {:ok, account}
+    else
+      {:error, "Account not found"}
     end
   end
 

@@ -22,9 +22,9 @@ config :rocketpay, Rocketpay.Repo,
   migration_primary_key: [type: :binary_id],
   migration_foreign_key: [type: :binary_id]
 
-config :rocketpay, :basic_auth,
-  username: "test",
-  password: "Pass$123"
+config :rocketpay, Rocketpay.UserManager.Guardian,
+  issuer: "rocketpay",
+  secret_key: "O52ych/ZE/S5243kGh+/Wveovz0Y1rGFLr3LqjUgy8aBklvD13y39o3MuL9dyrZ5"
 
 # Configures Elixir's Logger
 config :logger, :console,
