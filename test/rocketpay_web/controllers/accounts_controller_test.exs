@@ -2,6 +2,7 @@ defmodule RocketpayWeb.AccountsControllerTest do
   use RocketpayWeb.ConnCase, async: true
 
   alias Rocketpay.{Account, User}
+  alias RocketpayWeb.TestHelper
 
   describe "deposit/2" do
     setup %{conn: conn} do
@@ -15,8 +16,10 @@ defmodule RocketpayWeb.AccountsControllerTest do
 
       {:ok, %User{account: %Account{id: account_id}}} = Rocketpay.create_user(params)
 
+      {:ok, token} = TestHelper.authenticate(params)
+
       conn = conn
-        |> put_req_header("authorization", "Basic " <> "dGVzdDpQYXNzJDEyMw==")
+        |> put_req_header("authorization", "Bearer " <> token)
 
       {:ok, conn: conn, account_id: account_id}
     end
