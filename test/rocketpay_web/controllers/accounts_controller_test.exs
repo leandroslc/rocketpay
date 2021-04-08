@@ -37,6 +37,14 @@ defmodule RocketpayWeb.AccountsControllerTest do
 
         assert %{"errors" => %{"message" => "Invalid deposit value"}} = response
     end
+
+    test "should return error if not authorized", %{account_id: account_id} do
+      conn = build_conn()
+
+      conn
+      |> put(Routes.accounts_path(conn, :deposit, account_id, %{}))
+      |> json_response(:unauthorized)
+    end
   end
 
   describe "withdraw/2" do
@@ -87,6 +95,14 @@ defmodule RocketpayWeb.AccountsControllerTest do
 
       assert %{"errors" => %{"message" => "Invalid withdraw value"}} = response
     end
+
+    test "should return error if not authorized", %{account_id: account_id} do
+      conn = build_conn()
+
+      conn
+      |> put(Routes.accounts_path(conn, :withdraw, account_id, %{}))
+      |> json_response(:unauthorized)
+    end
   end
 
   describe "transaction/2" do
@@ -122,6 +138,14 @@ defmodule RocketpayWeb.AccountsControllerTest do
           }
         }
       } = response
+    end
+
+    test "should return error if not authorized" do
+      conn = build_conn()
+
+      conn
+      |> post(Routes.accounts_path(conn, :transaction, %{}))
+      |> json_response(:unauthorized)
     end
   end
 
