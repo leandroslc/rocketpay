@@ -20,7 +20,7 @@ defmodule RocketpayWeb.SessionController do
     with {:ok, jwt, _claims} <- Guardian.encode_and_sign(user) do
       conn
       |> put_status(:ok)
-      |> json(%{jwt: jwt})
+      |> json(%{token: jwt})
     end
   end
 end
