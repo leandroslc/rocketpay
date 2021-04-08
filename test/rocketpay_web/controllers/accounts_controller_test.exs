@@ -89,6 +89,42 @@ defmodule RocketpayWeb.AccountsControllerTest do
     end
   end
 
+  describe "transaction/2" do
+    setup %{conn: conn} do
+      {:ok, %{user: user, account_id: from_id, params: sender_params}} = create_user("Sender User", "sender-user")
+      {:ok, %{account_id: to_id}} = create_user("Receiver User", "receiver-user")
+
+      conn = conn |> authenticate(sender_params)
+
+      {:ok, conn: conn, user: user, from_id: from_id, to_id: to_id}
+    end
+
+    test "make transaction", %{conn: conn, user: user, from_id: from_id, to_id: to_id} do
+      Rocketpay.deposit(%{"id" => from_id, "value" => "100.0"}, user)
+
+      params = %{"from" => from_id, "to" => to_id, "value" => "60.0"}
+
+      response =
+        conn
+        |> post(Routes.accounts_path(conn, :transaction, params))
+        |> json_response(:ok)
+
+      assert %{
+        "message" => "Transaction done",
+        "transaction" => %{
+          "from_account" => %{
+            "balance" => "40.0",
+            "id" => _from_id
+          },
+          "to_account" => %{
+            "balance" => "60.0",
+            "id" => _to_id
+          }
+        }
+      } = response
+    end
+  end
+
   defp create_user(name, nickname) do
     {:ok, %User{account: %Account{id: account_id}} = user, params} = TestHelper.create_user(name, nickname)
 
