@@ -8,7 +8,7 @@ defmodule Rocketpay.UserManager.ErrorHandler do
     body = to_string(type)
 
     conn
-    |> put_resp_content_type("text/plain")
-    |> send_resp(401, body)
+    |> put_resp_content_type("text/json")
+    |> send_resp(401, Jason.encode!(%{message: body}))
   end
 end
