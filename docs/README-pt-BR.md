@@ -21,6 +21,7 @@ Um repositório para experimentação e estudo com Elixir usando Phoenix, Ecto e
 ## :rocket: Iniciando
 - Instale o [Elixir](https://elixir-lang.org).
 - Instale o [Phoenix](https://www.phoenixframework.org).
+- Configure um servidor [PostgreSQL](https://www.postgresql.org). Caso contrário, se estiver usando docker, você pode apenas executar `docker-compose up db`.
 - Instale as dependências com `mix deps.get`.
 - Crie e execute as migrações do banco de dados com `mix ecto.setup`.
 - Inicie o servidor com `mix phx.server`.

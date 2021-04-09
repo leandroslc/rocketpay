@@ -23,6 +23,7 @@ A repository to experiment with Elixir using Phoenix, Ecto and many other tools.
 ## :rocket: Getting started
 - Install [Elixir](https://elixir-lang.org).
 - Install [Phoenix](https://www.phoenixframework.org).
+- Setup a [PostgreSQL](https://www.postgresql.org) server. If using docker, you can just run `docker-compose up db` instead.
 - Install dependencies with `mix deps.get`.
 - Create and migrate the database with `mix ecto.setup`.
 - Start the server with `mix phx.server`.
