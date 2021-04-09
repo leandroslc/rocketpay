@@ -30,6 +30,8 @@ A repository to experiment with Elixir using Phoenix, Ecto and many other tools.
 - User registration and authentication.
 - Bearer (token) authentication.
 
+**[See the list of endpoints](./docs/endpoints.md)**.
+
 ## :rocket: Getting started
 - Install [Elixir](https://elixir-lang.org).
 - Install [Phoenix](https://www.phoenixframework.org).

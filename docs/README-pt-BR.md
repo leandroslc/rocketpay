@@ -28,6 +28,8 @@ Um repositório para experimentação e estudo com Elixir usando Phoenix, Ecto e
 - Registro e autenticação de usuários.
 - Authenticação usando _Bearer authentication_.
 
+**[Veja a lista de rotas](./docs/endpoints.md)**.
+
 ## :rocket: Iniciando
 - Instale o [Elixir](https://elixir-lang.org).
 - Instale o [Phoenix](https://www.phoenixframework.org).
