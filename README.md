@@ -1,19 +1,33 @@
-# Rocketpay
+<h1 align="center">Rocketpay</h1>
 
-To start your Phoenix server:
+<p align="center">
+  A sample web API to create and operate simple bank accounts.
+</p>
 
-  * Install dependencies with `mix deps.get`
-  * Create and migrate your database with `mix ecto.setup`
-  * Start Phoenix endpoint with `mix phx.server`
+<p align="center">
+  <em>
+    Built during the <u>Next Level Week 4</u> by <a href="https://rocketseat.com.br/">Rocketseat</a>. 🚀
+  </em>
+</p>
 
-Now you can visit [`localhost:4000`](http://localhost:4000) from your browser.
+## :book: Purpose
+A repository to experiment with Elixir using Phoenix, Ecto and many other tools.
 
-Ready to run in production? Please [check our deployment guides](https://hexdocs.pm/phoenix/deployment.html).
+## :sparkles: Features
+- Account deposit, withdraw and transaction operations.
+- User registration and authentication.
+- Bearer (token) authentication.
 
-## Learn more
+## :rocket: Getting started
+- Install [Elixir](https://elixir-lang.org).
+- Install [Phoenix](https://www.phoenixframework.org).
+- Install dependencies with `mix deps.get`.
+- Create and migrate the database with `mix ecto.setup`.
+- Start the server with `mix phx.server`.
 
-  * Official website: https://www.phoenixframework.org/
-  * Guides: https://hexdocs.pm/phoenix/overview.html
-  * Docs: https://hexdocs.pm/phoenix
-  * Forum: https://elixirforum.com/c/phoenix-forum
-  * Source: https://github.com/phoenixframework/phoenix
+## :package: Using a Docker container
+If you do not want to setup an Elixir environment, you may benefit from using [Visual Studio Code's Remote Containers](https://code.visualstudio.com/docs/remote/containers).
+
+## :memo: References
+- [Phoenix famework docs and guides](https://hexdocs.pm/phoenix)
+- [Ecto reference](https://hexdocs.pm/ecto)
