@@ -3,6 +3,10 @@
   "dockerComposeFile": [
     "../docker-compose.yml"
   ],
+  "extensions": [
+    "jakebecker.elixir-ls",
+    "iampeterbanjo.elixirlinter"
+  ],
   "service": "app",
   "workspaceFolder": "/workspace",
   "shutdownAction": "stopCompose"

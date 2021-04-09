@@ -3,23 +3,24 @@ version: '3.1'
 services:
 
   db:
+    container_name: postgres
     image: postgres
     restart: always
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
-    ports:
-      - 5432:5432
 
   app:
+    container_name: app
     build:
       context: .
       dockerfile: Dockerfile
     ports:
       - 4000:4000
-    network_mode: host
     volumes:
       - .:/workspace
     command: sleep infinity
+    environment:
+      DATABASE_HOST: db
     depends_on:
       - db

@@ -10,3 +10,4 @@ ENV LANGUAGE en_US:en
 ENV LC_ALL en_US.UTF-8
 
 RUN apt-get install -y gcc g++ make
+RUN mix local.hex --force
