@@ -12,6 +12,16 @@ Translations: [pt-BR](./docs/README-pt-BR.md)
   </em>
 </p>
 
+<div align="center">
+  <a href="https://github.com/leandroslc/rocketpay/actions?query=workflow%3ABuild">
+    <img src="https://github.com/leandroslc/rocketpay/workflows/Build/badge.svg" alt="Build status" />
+  </a>
+  <a href="https://codecov.io/gh/leandroslc/rocketpay">
+    <img src="https://codecov.io/gh/leandroslc/rocketpay/branch/main/graph/badge.svg?token=MOB68asR04" alt="Code coverage status"/>
+  </a>
+  <img src="https://img.shields.io/badge/NLW-%231-8257e6.svg" alt="NLW #4" />
+</div>
+
 ## :book: Purpose
 A repository to experiment with Elixir using Phoenix, Ecto and many other tools.
 
