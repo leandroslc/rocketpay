@@ -1,3 +1,5 @@
+Translations: [pt-BR](./docs/README-pt-BR.md)
+
 <h1 align="center">Rocketpay</h1>
 
 <p align="center">
