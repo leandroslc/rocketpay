@@ -1,0 +1,51 @@
+name: Build
+
+on:
+  push:
+    branches: [ leandroslc/build ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        otp-version: ['22.2']
+        elixir-version: ['1.11.3']
+
+    services:
+      db:
+        image: postgres:11
+        ports: ['5432:5432']
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+
+    - name: Use Erlang/OTP ${{ matrix.otp-version }} and Elixir ${{ matrix.elixir-version }}
+      uses: erlef/setup-beam@v1
+      with:
+        otp-version: ${{ matrix.otp-version }}
+        elixir-version: ${{ matrix.elixir-version }}
+
+    - name: 'Get dependencies'
+      run: mix deps.get
+
+    - name: 'Test'
+      run: mix coveralls.json
+
+    - name: Publish coverage
+      uses: codecov/codecov-action@v1
+      with:
+        file: ./cover/excoveralls.json
